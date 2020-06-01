@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Publish Certificate on Blockchain</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+	<form>
+		<div class="form-group">
+    		<label for="insti">Institute Name</label>
+    		<input type="text" class="form-control" id="insti" placeholder="Enter Institute Name" required>
+  		</div>
+		<div class="form-group">
+    		<label for="reci">Recipient Name</label>
+    		<input type="text" class="form-control" id="reci" placeholder="Enter Recipient Name" required>
+  		</div>
+  		<div class="form-group">
+    		<label for="course">Course Name</label>
+    		<input type="text" class="form-control" id="course" placeholder="Enter Course Name" required>
+  		</div>
+  		<div class="form-group">
+    		<label for="marks">Marks/Grade</label>
+    		<input type="text" class="form-control" id="marks" placeholder="Enter Marks/Grade" required>
+  		</div>
+  		<div class="form-group">
+    		<label for="uniqueID">Recipient Unique ID</label>
+    		<input type="text" class="form-control" id="uniqueID" placeholder="Enter Recipient uniqueID" required>
+  		</div>
+  		<div class="form-group">
+    		<label for="doc">Date of Completion</label>
+    		<input type="date" class="form-control" id="doc" placeholder="Enter Date of Completion" required>
+  		</div>
+  		<div class="upload">
+    		<label class="upload-label" for="customFile">Upload Certificate</label>
+    		<input type="file" class="upload" id="certi" required>
+  		</div>
+  		<button type='button' id="sendHashButton" onclick="send()" class="btn btn-primary">Publish</button>
+	</form>
+</body>
+</html>
