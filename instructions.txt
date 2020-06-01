@@ -1,0 +1,16 @@
+truffle compile
+
+truffle migrate --network development --reset
+
+
+Public address of the key:   0x9f0fb3BF2Ea1f6bae85a5D9B9e773719cC632479
+Path of the secret key file: /home/sampatghosh/rinkeby/keystore/UTC--2020-06-01T07-04-20.332244010Z--9f0fb3bf2ea1f6bae85a5d9b9e773719cc632479
+
+- You can share your public address with anyone. Others need it to interact with you.
+- You must NEVER share the secret key with anyone! The key controls access to your funds!
+- You must BACKUP your key file! Without the key, it's impossible to access account funds!
+- You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
+
+geth --rinkeby --syncmode fast --rpc --password <(echo "7267728") --unlock 0 --datadir="$HOME/rinkeby/" --allow-insecure-unlock
+
+truffle migrate --network rinkeby
