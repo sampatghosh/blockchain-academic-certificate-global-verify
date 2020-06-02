@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function hashForFile(callback) {
-  input = document.getElementById("hashFile");
+  input = document.getElementById("certi");
   if (!input.files[0]) {
     alert("Please select a file first");
   }
@@ -23,13 +23,20 @@ function hashForFile(callback) {
 
 function send () {
   hashForFile(function (err, hash) {
-    certify_send(hash, function(err, tx) {
+  	insti = document.getElementById("insti");
+  	reci = document.getElementById("reci");
+  	course = document.getElementById("course");
+  	marks = document.getElementById("marks");
+  	doc = document.getElementById("doc");
+  	uniqueID = document.getElementById("uniqueID");
+    certify_send(hash, insti, reci, course, marks, doc, uniqueID, function(err, tx) {
       $("#responseText").html("<p>File successfully fingreprinted onto Ethereum blockchain.</p>"
         + "<p>File Hash Value: " + hash +"</p>"
         + "<p>Transaction ID: " + tx +"</p>"
         + "<p>Available at contract address: " + address +"</p>"
         + "<p><b>Please alow a few minutes for transaction to be mined.</b></p>"
       );
+      //this part is for adding hash and uniqueID to mongodb 
     });
   });
 };
