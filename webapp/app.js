@@ -29,14 +29,20 @@ function send () {
   	marks = document.getElementById("marks");
   	doc = document.getElementById("doc");
   	uniqueID = document.getElementById("uniqueID");
+  	
+  	//check whether uniqueID is valid or not
+  	// and if valid, are there any entries or not
+    
     certify_send(hash, insti, reci, course, marks, doc, uniqueID, function(err, tx) {
-      $("#responseText").html("<p>File successfully fingreprinted onto Ethereum blockchain.</p>"
+      $("#responseText").html("<p>Certificate successfully fingreprinted onto Ethereum blockchain.</p>"
         + "<p>File Hash Value: " + hash +"</p>"
         + "<p>Transaction ID: " + tx +"</p>"
         + "<p>Available at contract address: " + address +"</p>"
         + "<p><b>Please alow a few minutes for transaction to be mined.</b></p>"
       );
+      
       //this part is for adding hash and uniqueID to mongodb 
+    
     });
   });
 };
