@@ -45,7 +45,7 @@ foo@bar:~/blockchain-academic-certificate-global-verify$ truffle compile
 - Setup Local node using geth, create account and get some Rinkeby test Ether to your account
 - Start geth:
 ```console
-foo@bar:~$ geth --rinkeby --syncmode fast --rpc --password <(echo __password__) --unlock 0 --datadir="$HOME/rinkeby/" --allow-insecure-unlock
+foo@bar:~$ geth --rinkeby --syncmode fast --rpc --password <(echo password) --unlock 0 --datadir="$HOME/rinkeby/" --allow-insecure-unlock
 ```
 - Deploy Contract and note the contract address
 ```console
