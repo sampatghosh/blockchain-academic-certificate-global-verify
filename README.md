@@ -45,11 +45,11 @@ foo@bar:~/blockchain-academic-certificate-global-verify$ truffle compile
 - Setup Local node using geth, create account and get some Rinkeby test Ether to your account
 - Start geth and sync the nodes:
 ```console
-foo@bar:~$ geth --rinkeby --syncmode fast --rpc --password <(echo password) --unlock 0 --datadir="$HOME/rinkeby/" --allow-insecure-unlock
+foo@bar:~$ geth --port 3000 --networkid 58343 --nodiscover --datadir=~/blockchain --maxpeers=0 --rpc --rpcport 8543 --rpcaddr 127.0.0.1 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner" --allow-insecure-unlock
 ```
 - Deploy Contract and note the contract address
 ```console
-foo@bar:~/blockchain-academic-certificate-global-verify$ truffle migrate --network rinkeby
+foo@bar:~/blockchain-academic-certificate-global-verify$ truffle migrate 
 ```
 - Write the contract address at line 3 in app.js
 > var address = "0xd121f94184Da71908123a1e08F72cAB8573b9363";
