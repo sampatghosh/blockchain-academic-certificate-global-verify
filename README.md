@@ -16,7 +16,7 @@
 ## Tools Used 
 - Truffle
 - Ganache
-- Rinkeby Test Network
+- Ethereum
 - NodeJS
 - MetaMask
 - MongoDB
