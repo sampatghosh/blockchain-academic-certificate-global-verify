@@ -1,4 +1,4 @@
-# Academic Certificate Issuing and Global Search using Private Ethereum Blockchain and MongoDB
+# Academic Certificate Issuing and Global Search using Private Ethereum Blockchain and SQLite
 
 ## Features
 - Issue UniqueID to recipients
@@ -19,7 +19,7 @@
 - Ethereum
 - NodeJS
 - MetaMask
-- MongoDB
+- SQLite
 
 ## Languages Used
 - Solidity
