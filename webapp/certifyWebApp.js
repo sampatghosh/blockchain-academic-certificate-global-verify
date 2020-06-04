@@ -1,6 +1,6 @@
 var contract = undefined;
 var customProvider = undefined;
-var address = "0xd121f94184Da71908123a1e08F72cAB8573b9363";
+var address = "0xbB5A8D94c143b7B12342Fd9D8E7a9853449CD04C";
 var abi = undefined;
 
 function certify_init () {

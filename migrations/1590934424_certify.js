@@ -1,6 +1,6 @@
-var CertifyContract = artifacts.require("Certify");
+var CertifyContract = artifacts.require("Certify.sol");
 
-module.exports = function(_deployer) {
+module.exports = function(deployer) {
   // Use deployer to state migration tasks.
-  _deployer.deploy(CertifyContract);
+  deployer.deploy(CertifyContract);
 };
