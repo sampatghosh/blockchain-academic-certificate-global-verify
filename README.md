@@ -1,4 +1,4 @@
-# Academic Certificate Issuing and Global Search using Blockchain and MongoDB
+# Academic Certificate Issuing and Global Search using Private Ethereum Blockchain and MongoDB
 
 ## Features
 - Issue UniqueID to recipients
