@@ -42,8 +42,8 @@ foo@bar:~$ cd blockchain-academic-certificate-global-verify
 ```console
 foo@bar:~/blockchain-academic-certificate-global-verify$ truffle compile
 ```
-- Setup Local node using geth, create account and get some Rinkeby test Ether to your account
-- Start geth and sync the nodes:
+- Setup private blockchain node using geth, create account and generate fake Ether for your account
+- Start your node using:
 ```console
 foo@bar:~$ geth --port 3000 --networkid 58343 --nodiscover --datadir=~/blockchain --maxpeers=0 --rpc --rpcport 8543 --rpcaddr 127.0.0.1 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner" --allow-insecure-unlock
 ```
