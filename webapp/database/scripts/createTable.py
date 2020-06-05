@@ -1,3 +1,7 @@
+"""
+This script create table in database and only to be run once. 
+"""
+
 import sqlite3
 from sqlite3 import Error
 
@@ -21,18 +25,20 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-	database_file = r"E:\MTech\2nd_sem\BCT\Project\blockchain-academic-certificate-global-verify\webapp\database\db\projectdb.db"
+	database_file = r"..\db\projectdb.db"
 
-	sql_create_table_std_details = """ CREATE TABLE IF NOT EXISTS STUDENT_DETAILS(
-											id text PRIMARY KEY,
+	sql_create_table_std_details = """ CREATE TABLE STUDENT_DETAILS(
+											id integer PRIMARY KEY,
+											email_id text NOT NULL,
 											name text NOT NULL,
 											password text NOT NULL,
 											dob text
 									);"""
 
-	sql_create_table_std_cert_hash = """ CREATE TABLE IF NOT EXISTS STUDENT_DOCUMENT_HASH(
-											student_id text NOT NULL,
-											document_hash text PRIMARY KEY,
+	sql_create_table_std_cert_hash = """ CREATE TABLE STUDENT_DOCUMENT_HASH(
+											id integer PRIMARY KEY,
+											student_id integer NOT NULL,
+											document_hash text NOT NULL,
 											date_created text,
 											FOREIGN KEY (student_id) REFERENCES STUDENT_DETAILS(id)
 									);"""
@@ -46,6 +52,9 @@ def main():
 		print("Table STUDENT_DOCUMENT_HASH is created.")
 	else:
 		print("Error: Failed to connect to database.")
+
+	conn.commit()
+	conn.close()
 
 
 if __name__ == '__main__':

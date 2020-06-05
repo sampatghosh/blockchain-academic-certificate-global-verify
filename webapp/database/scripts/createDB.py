@@ -1,3 +1,7 @@
+"""
+This script create the database for the application and only to be run once. 
+"""
+
 import sqlite3
 from sqlite3 import Error
 
@@ -15,5 +19,5 @@ def create_connection(db_file):
 
 
 if __name__ == '__main__':
-	create_connection(r"E:\MTech\2nd_sem\BCT\Project\blockchain-academic-certificate-global-verify\webapp\database\db\projectdb.db")
+	create_connection(r"..\db\projectdb.db")
 	
