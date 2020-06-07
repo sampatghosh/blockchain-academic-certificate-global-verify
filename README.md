@@ -45,7 +45,8 @@ foo@bar:~/blockchain-academic-certificate-global-verify$ truffle compile
 - Setup private blockchain using geth, create account and generate fake Ether for your account
 - Start your node using:
 ```console
-foo@bar:~$ geth --port 3000 --networkid 58343 --nodiscover --datadir=~/blockchain --maxpeers=0 --rpc --rpcport 8543 --rpcaddr 127.0.0.1 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner" --allow-insecure-unlock
+foo@bar:~$ geth --port 3000 --networkid 143 --nodiscover --rpc --rpcport 8545 --rpcaddr 127.0.0.1 --datadir=~/blockchain --maxpeers=0 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner" --allow-insecure-unlock --password <(echo password) --unlock 0
+
 ```
 - Deploy Contract and note the contract address
 ```console
@@ -53,4 +54,24 @@ foo@bar:~/blockchain-academic-certificate-global-verify$ truffle migrate
 ```
 - Write the contract address at line 3 in app.js
 > var address = "0xd121f94184Da71908123a1e08F72cAB8573b9363";
-- Setup MetaMask
+- Setup MetaMask and import account from blockchain directory
+- Open geth console and start mining:
+```console
+foo@bar:~$ geth attach ipc:/$HOME/blockchain/geth.ipc
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.9.14-stable-6d74d1e5/linux-amd64/go1.14.2
+coinbase: 0x7c5c723cd38eeb2d2975dc241fa0a54a9f0ff3da
+at block: 2931 (Sun Jun 07 2020 14:27:14 GMT+0530 (IST))
+datadir: /home/sampatghosh/blockchain
+modules: admin:1.0 debug:1.0 eth:1.0 ethash:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+> miner.start() 
+```
+- Run database API
+```console
+foo@bar:~$ python3 /blockchain-academic-certificate-global-verify/webapp/api/api.py 
+```
+- Run Node.js server and click on main.html
+```console
+foo@bar:~$ http-server blockchain-academic-certificate-global-verify/webapp/frontend/ -c-1 
+```
