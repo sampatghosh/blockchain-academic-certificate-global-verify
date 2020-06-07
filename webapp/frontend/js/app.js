@@ -9,12 +9,12 @@ $(document).ready(function() {
   $("#check_id_button").click(function(){
     $("#form_fieldset").attr('disabled', 'disabled');
     var id = $("#id_text_box").val();
-    alert(id);
+    console.log("ID="+id);
 
-    api_url = 'http://127.0.0.2:5000/api/v1/queries/hashvalue';
+    api_url = 'http://127.0.0.1:5000/api/v1/queries/hashvalue';
     // parameter = '?id='+id;
     // req_url = api_url+parameter;
-    alert("requrl: "+api_url);
+    // alert("requrl: "+api_url);
 
 
     //api call to check if uniqueid is valid
@@ -31,7 +31,7 @@ $(document).ready(function() {
           $("#form_fieldset").removeAttr('disabled');
           $("#uniqueID").val(id);
           $("#uniqueID").attr('disabled', 'disabled');
-          alert("enabled");
+          console.log("enabled");
         }
         else{
           alert("Error: invalid unique id.")
@@ -44,35 +44,40 @@ $(document).ready(function() {
   //activity on Publish button click
 
   $("#sendHashButton").click(function(event) {
-
     hashForFile(function (err, hash) {
       insti = $("#insti").val();
       reci = $("#reci").val();
       course = $("#course").val();
       marks = $("#marks").val();
       doc = $("#doc").val();
-      uniqueID = $("#uniqueID").val();
-    
+      //uniqueID = $("#uniqueID").val();
+      
     //check whether uniqueID is valid -- It is valid.
     
-      certify_send(hash, insti, reci, course, marks, doc, uniqueID, function(err, tx) {
+      certify_send(hash, insti, reci, course, marks, doc, function(err, tx) {
+        console.log("Transaction ID="+tx);
+        console.log("Contract Address="+address);
+        console.log("Available at contract address: " + address);
         $("#responseText").html("<p>Certificate successfully fingreprinted onto Ethereum blockchain.</p>"
           + "<p>File Hash Value: " + hash +"</p>"
           + "<p>Transaction ID: " + tx +"</p>"
           + "<p>Available at contract address: " + address +"</p>"
           + "<p><b>Please alow a few minutes for transaction to be mined.</b></p>"
         );
+        if(!tx) {
+        	$("#responseText").html("<p><b>Certificate failed to get fingreprinted onto Ethereum blockchain</b></p>");
+        }
       });
 
       //this part is for adding hash and uniqueID to database
 
       uniqueID = $("#uniqueID").val();
-      hash = $("#insti").val();
-      alert(uniqueID);
-      alert(hash);
+      //hash = $("#insti").val();
+      console.log("UniqueID="+uniqueID);
+      console.log("Hash="+hash);
 
-      api_url = 'http://127.0.0.2:5000/api/v1/insert/hashvalue';
-      alert("requrl: "+api_url);
+      api_url = 'http://127.0.0.1:5000/api/v1/insert/hashvalue';
+      console.log("requrl: "+api_url);
 
       // api call to send hash value
       $.ajax({
@@ -85,10 +90,10 @@ $(document).ready(function() {
           console.log(result.id_exists);
           var status = result.status;
           if(status==0){
-            alert("successful insert");
+            console.log("successful insert");
           }
           else{
-            alert("Error: Insert failed")
+            console.log("Error: Insert failed")
           }
         }
       })
@@ -106,13 +111,14 @@ $(document).ready(function() {
 //utility functions
 
 function hashForFile(callback) {
-  // input = document.getElementById("certi");
-  input = $("#certi");
-  if (!input.files[0]) {
+  //input = document.getElementById("certi");
+   input = $("#certi").prop('files')[0];
+  
+  if (!input) {
     alert("Please select a file first");
   }
   else {
-    file = input.files[0];
+    file = input;
     fr = new FileReader();
     fr.onload = function (e) {
       content = e.target.result;
@@ -139,7 +145,7 @@ function hashForFile(callback) {
   	
 //   	//check whether uniqueID is valid
     
-//     certify_send(hash, insti, reci, course, marks, doc, uniqueID, function(err, tx) {
+//     certify_send(hash, insti, reci, course, marks, doc, function(err, tx) {
 //       $("#responseText").html("<p>Certificate successfully fingreprinted onto Ethereum blockchain.</p>"
 //         + "<p>File Hash Value: " + hash +"</p>"
 //         + "<p>Transaction ID: " + tx +"</p>"

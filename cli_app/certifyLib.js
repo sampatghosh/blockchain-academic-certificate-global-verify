@@ -7,7 +7,7 @@ let contract = undefined;
 
 function init () {
   //set up network
-  let provider = new Web3.providers.HttpProvider("http://localhost:7545");
+  let provider = new Web3.providers.HttpProvider("http://localhost:8545");
   web3 = new Web3(provider);
 
   //contract abi
@@ -112,7 +112,7 @@ function init () {
   ];
 
   //assign contract address
-  let address = "0x1a1F692B247F0FB8D71d2B6359BF29524C7b9bB3";
+  let address = "0xbB5A8D94c143b7B12342Fd9D8E7a9853449CD04C";
 
   //init contract
   contract = new web3.eth.Contract(abi, address);

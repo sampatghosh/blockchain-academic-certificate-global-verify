@@ -55,7 +55,7 @@ def api_call_insert_hash():
 		param_student_id = request.args['id']
 		hash_value = request.args['hash']
 		print("parameters recieved")
-		database_file = r"..\database\db\projectdb.db"
+		database_file = r"../database/db/projectdb.db"
 		conn = create_connection(database_file)
 		print("database connection created")
 		print(conn)
@@ -107,7 +107,7 @@ def api_call_hash_id():
 
 	# establish database connection
 
-	database_file = r"..\database\db\projectdb.db"
+	database_file = r"../database/db/projectdb.db"
 	conn = create_connection(database_file)
 	print("connection created")
 	print(conn)
@@ -206,4 +206,4 @@ def insert_doc_hash(conn, doc):
 
 
 
-app.run(host="127.0.0.2")
+app.run(host="127.0.0.1")

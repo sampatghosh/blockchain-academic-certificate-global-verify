@@ -1,15 +1,19 @@
 var contract = undefined;
 var customProvider = undefined;
-var address = "0xbB5A8D94c143b7B12342Fd9D8E7a9853449CD04C";
+var address = "0xfBB02839E0DFCaFd6ca4784399E28F3091b8F072";
 var abi = undefined;
+// var acc = "0x7c5c723cd38eeb2d2975dc241fa0a54a9f0ff3da";
 
 function certify_init () {
   //set up network
-  if (typeof web3 !== 'undefined') {
+  // if (typeof web3 !== 'undefined') {
     // Use existing gateway
-    window.web3 = new Web3(web3.currentProvider);
+    // window.web3 = new Web3(web3.currentProvider);
+  if (window.ethereum) {
+    window.web3 = new Web3(ethereum);
+    window.ethereum.enable();
   } else {
-    alert("No Ethereum interface injected into browser. Read-only access");
+    alert("No Ethereum interface injected into browser.");
   }
   //contract abi
   let abi = [
@@ -114,18 +118,29 @@ function certify_init () {
 
   //init contract
   contract = new web3.eth.Contract(abi, address);
+  // contract = new web3.eth.Contract(abi, address, {
+  //   from: acc, // default from address
+  //   gasPrice: '20000000000' // default gas price in wei, 20 gwei in this case
+  // });
+  // console.log(contract.methods);
 };
 
 //sends a hash to the blockchain
 function certify_send (hash, insti, reci, course, grade, doc, callback) {
     web3.eth.getAccounts(function (error, accounts) {
-      contract.methods.addDocHash(hash, insti, reci, course, grade, doc).send({
-        from: accounts[0]
-      },function(error, tx) {
-        if (error) callback(error, null);
-        else callback(null, tx);
+      // console.log("Account="+accounts[0]);
+      web3.eth.getBlock("latest", false, (error, result) => {
+        console.log(result.gasLimit)
+      
+        contract.methods.addDocHash(hash, insti, reci, course, grade, doc).send({
+      	 from: accounts[0],
+          // gas: result.gasLimit-100000,
+        },function(error, tx) {
+          if (error) callback(error, null);
+          else callback(null, tx);
+        });
       });
-    });
+    });  
 };
 
 //looks up a hash on the blockchain
