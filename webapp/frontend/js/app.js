@@ -67,11 +67,18 @@ $(document).ready(function() {
         if(!tx) {
         	$("#responseText").html("<p><b>Certificate failed to get fingreprinted onto Ethereum blockchain</b></p>");
         }
+        else{
+          uniqueid = $("#uniqueID").val();
+          insertIntoDB(hash, uniqueid);
+        }
+
+
+
       });
 
 
-      uniqueid = $("#uniqueID").val();
-      insertIntoDB(hash, uniqueid);
+      // uniqueid = $("#uniqueID").val();
+      // insertIntoDB(hash, uniqueid);
 
     });
 
@@ -97,7 +104,7 @@ function insertIntoDB(hash, uniqueid){
         url: api_url,
         type: 'GET',
         dataType: 'json',
-        data: {id:uniqueID, hash:hash},
+        data: {id:uniqueid, hash:hash},
         success: function(result){
           console.log("success");
           // console.log(result.id_exists);
