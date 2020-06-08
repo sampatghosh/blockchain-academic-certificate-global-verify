@@ -20,10 +20,12 @@
 - NodeJS
 - MetaMask
 - SQLite
+- Flusk
 
 ## Languages Used
 - Solidity
 - JavaScript
+- Python 3
 
 ## Steps to replicate result
 - Clone the directory 
