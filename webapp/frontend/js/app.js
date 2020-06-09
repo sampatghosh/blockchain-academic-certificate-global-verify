@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   $("#form_fieldset").attr('disabled', 'disabled');
-  // certify_init(); //this one should be uncommented
+  certify_init(); //this one should be uncommented
 
 
   //activity on Check button click
@@ -216,22 +216,22 @@ function find (hashValArr) {
   var hash;
   $("#responseText").html('');
   for (hash of hashValArr){
-    $("#responseText").append('<p>'+hash+'</p>');
-    // certify_find(hash, function(err, resultObj) {
-    //   if (resultObj.blockNumber != 0) {
-    //     $("#responseText").append(
-    //         "<p>Institute: " + resultObj.instituteName + "</p>"
-    //       + "<p>Recipient: " + resultObj.recipientName + "</p>"
-    //       + "<p>Course: " + resultObj.courseName + "</p>"
-    //       + "<p>Marks/Grade: " + resultObj.marks + "</p>"
-    //       + "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
-    //     );
-    //   } else {
-    //     $("#responseText").append("<p>File fingerprint not found on Ethereum blockchain.</p>"
-    //       + "<p>File Hash Value: " + hash + "</p>"
-    //     );
-    //   }
-    // });
+    // $("#responseText").append('<p>'+hash+'</p>');
+    certify_find(hash, function(err, resultObj) {
+      if (resultObj.blockNumber != 0) {
+        $("#responseText").append(
+            "<p>Institute: " + resultObj.instituteName + "</p>"
+          + "<p>Recipient: " + resultObj.recipientName + "</p>"
+          + "<p>Course: " + resultObj.courseName + "</p>"
+          + "<p>Marks/Grade: " + resultObj.marks + "</p>"
+          + "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
+        );
+      } else {
+        $("#responseText").append("<p>File fingerprint not found on Ethereum blockchain.</p>"
+          + "<p>File Hash Value: " + hash + "</p>"
+        );
+      }
+    });
   }
 
 };
