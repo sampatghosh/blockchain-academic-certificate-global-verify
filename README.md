@@ -20,7 +20,7 @@
 - NodeJS
 - MetaMask
 - SQLite
-- Flusk
+- Flask
 
 ## Languages Used
 - Solidity
@@ -48,15 +48,7 @@ foo@bar:~/blockchain-academic-certificate-global-verify$ truffle compile
 - Start your node using:
 ```console
 foo@bar:~$ geth --port 3000 --networkid 143 --nodiscover --rpc --rpcport 8545 --rpcaddr 127.0.0.1 --datadir=~/blockchain --maxpeers=0 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner" --allow-insecure-unlock --password <(echo password) --unlock 0
-
 ```
-- Deploy Contract and note the contract address
-```console
-foo@bar:~/blockchain-academic-certificate-global-verify$ truffle migrate 
-```
-- Write the contract address at line 3 in app.js
-> var address = "0xd121f94184Da71908123a1e08F72cAB8573b9363";
-- Setup MetaMask and import account from blockchain directory
 - Open geth console and start mining:
 ```console
 foo@bar:~$ geth attach ipc:/$HOME/blockchain/geth.ipc
@@ -69,11 +61,19 @@ datadir: /home/sampatghosh/blockchain
 modules: admin:1.0 debug:1.0 eth:1.0 ethash:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 > miner.start() 
 ```
+- Deploy Contract and note the contract address
+```console
+foo@bar:~/blockchain-academic-certificate-global-verify$ truffle migrate 
+```
+- Write the contract address at line 3 in app.js
+> var address = "0xd121f94184Da71908123a1e08F72cAB8573b9363";
+- Setup MetaMask and import account from blockchain directory
+
 - Run database API
 ```console
 foo@bar:~$ python3 /blockchain-academic-certificate-global-verify/webapp/api/api.py 
 ```
 - Run Node.js server and click on main.html
 ```console
-foo@bar:~$ http-server blockchain-academic-certificate-global-verify/webapp/frontend/ -c-1 
+foo@bar:~$ http-server blockchain-academic-certificate-global-verify/webapp/ -c-1 
 ```
