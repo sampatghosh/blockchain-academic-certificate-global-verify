@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
   $("#form_fieldset").attr('disabled', 'disabled');
-  certify_init(); //this one should be uncommented
+  // certify_init(); //this one should be uncommented
 
 
   //activity on Check button click
@@ -81,6 +81,46 @@ $(document).ready(function() {
       // insertIntoDB(hash, uniqueid);
 
     });
+
+  });
+
+
+  //activity on search button click in search.html
+
+  $("#searchBtn").click(function(event) {
+    /* Act on the event */
+    var id = $("#searchTextBox").val().trim();
+
+    console.log("ID="+id);
+
+    api_url = 'http://127.0.0.1:5000/api/v1/queries/hashvalue';
+    // parameter = '?id='+id;
+    // req_url = api_url+parameter;
+    // alert("requrl: "+api_url);
+
+
+    //api call to check if uniqueid is valid
+    $.ajax({
+      url: api_url,
+      type: 'GET',
+      dataType: 'json',
+      data: {id: id},
+      success: function(result){
+        console.log("success");
+        console.log(result.id_exists);
+        var id_exists = result.id_exists;
+        if(id_exists){
+          console.log("student id: "+result.student_id);
+          console.log("hash entry: "+result.total_hash);
+          hashValArr = result.hash_values;
+          console.log(hashValArr);
+          find(hashValArr);
+        }
+        else{
+          $("#responseText").html("<p>Error: invalid unique id.</p>");
+        }
+      }
+    })
 
   });
 
@@ -171,22 +211,27 @@ function hashForFile(callback) {
 //   });
 // };
 
-function find () {
-  hashForFile(function (err, hash) {
-    certify_find(hash, function(err, resultObj) {
-      if (resultObj.blockNumber != 0) {
-        $("#responseText").html(
-            "<p>Institute: " + resultObj.instituteName + "</p>"
-          + "<p>Recipient: " + resultObj.recipientName + "</p>"
-          + "<p>Course: " + resultObj.courseName + "</p>"
-          + "<p>Marks/Grade: " + resultObj.marks + "</p>"
-          + "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
-        );
-      } else {
-        $("#responseText").html("<p>File fingerprint not found on Ethereum blockchain.</p>"
-          + "<p>File Hash Value: " + hash + "</p>"
-        );
-      }
-    });
-  });
+function find (hashValArr) {
+
+  var hash;
+  $("#responseText").html('');
+  for (hash of hashValArr){
+    $("#responseText").append('<p>'+hash+'</p>');
+    // certify_find(hash, function(err, resultObj) {
+    //   if (resultObj.blockNumber != 0) {
+    //     $("#responseText").append(
+    //         "<p>Institute: " + resultObj.instituteName + "</p>"
+    //       + "<p>Recipient: " + resultObj.recipientName + "</p>"
+    //       + "<p>Course: " + resultObj.courseName + "</p>"
+    //       + "<p>Marks/Grade: " + resultObj.marks + "</p>"
+    //       + "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
+    //     );
+    //   } else {
+    //     $("#responseText").append("<p>File fingerprint not found on Ethereum blockchain.</p>"
+    //       + "<p>File Hash Value: " + hash + "</p>"
+    //     );
+    //   }
+    // });
+  }
+
 };
