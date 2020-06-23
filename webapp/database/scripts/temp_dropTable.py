@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect(r'E:\MTech\2nd_sem\BCT\Project\blockchain-academic-certificate-global-verify\webapp\database\db\projectdb.db')
+conn = sqlite3.connect("../db/projectdb.db")
 
 #Creating a cursor object using the cursor() method
 cursor = conn.cursor()

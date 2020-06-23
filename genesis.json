@@ -1,12 +1,23 @@
 {
-	"config": {
-    	"chainId": 143,
-    	"homesteadBlock": 0,
-        "eip150Block": 0,
-        "eip155Block": 0,
-        "eip158Block": 0	
-    },
-	"alloc": {},
-	"difficulty" : "0x20000",
-	"gasLimit"   : "0x8880000"
+  "config": {
+    "chainId": 2018,
+    "homesteadBlock": 0,
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "byzantiumBlock": 5,
+    "constantinopleBlock": 10,
+    "constantinopleFixBlock": 20
+  },
+
+  "alloc"      : {},
+  "coinbase"   : "0x0000000000000000000000000000000000000000",
+  "difficulty" : "0x400",
+  "extraData"  : "",
+  "gasLimit"   : "0x8880000",
+  "nonce"      : "0x0000000000000042",
+  "mixhash"    : "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "parentHash" : "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "timestamp"  : "0x00"
 }

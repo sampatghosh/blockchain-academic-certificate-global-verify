@@ -35,12 +35,13 @@ def insert_doc_hash(conn, doc):
 
 
 def main():
-	database_file = r"..\db\projectdb.db"
+	database_file = "../db/projectdb.db"
 	conn = create_connection(database_file)
 
 	student = ('sampatghosh1995@gmail.com', 'Sampat Kr Ghosh', '12345@proj', '1995-02-15')
 	student_id = insert_student(conn, student)
-
+	print("student id: ", student_id)
+	'''
 	doc1 = (student_id, '0xab4f61c361e5ef91582e70634dfbf2214fbdb6f29c949160b69f27ae947d919d', datetime.datetime.now())
 	doc_id = insert_doc_hash(conn, doc1)
 	print("student id: ", student_id)
@@ -50,7 +51,7 @@ def main():
 	doc_id = insert_doc_hash(conn, doc2)
 	print("student id: ", student_id)
 	print("doc id: ", doc_id)
-
+	'''
 	conn.commit()
 	conn.close()
 

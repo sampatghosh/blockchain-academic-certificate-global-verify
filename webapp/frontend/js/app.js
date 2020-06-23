@@ -53,29 +53,36 @@ $(document).ready(function() {
       //uniqueID = $("#uniqueID").val();
       
     //check whether uniqueID is valid -- It is valid.
-    
-      certify_send(hash, insti, reci, course, marks, doc, function(err, tx) {
-        console.log("Transaction ID="+tx);
-        console.log("Contract Address="+address);
-        console.log("Available at contract address: " + address);
-        $("#responseText").html("<p>Certificate successfully fingreprinted onto Ethereum blockchain.</p>"
-          + "<p>File Hash Value: " + hash +"</p>"
-          + "<p>Transaction ID: " + tx +"</p>"
-          + "<p>Available at contract address: " + address +"</p>"
-          + "<p><b>Please alow a few minutes for transaction to be mined.</b></p>"
-        );
-        if(!tx) {
-        	$("#responseText").html("<p><b>Certificate failed to get fingreprinted onto Ethereum blockchain</b></p>");
-        }
-        else{
-          uniqueid = $("#uniqueID").val();
-          insertIntoDB(hash, uniqueid);
-        }
-
-
-
-      });
-
+    certify_find(hash, function(err, resultObj) {
+    	if(err || resultObj.blockNumber == 0) {
+	      	certify_send(hash, insti, reci, course, marks, doc, function(err, tx) {
+    	    	console.log("Transaction ID="+tx);
+        		console.log("Contract Address="+address);
+        		console.log("Available at contract address: " + address);
+        		$("#responseText").html("<p><b>Certificate successfully fingreprinted onto Ethereum blockchain.</b></p>"
+          			+ "<p>File Hash Value: " + hash +"</p>"
+          			+ "<p>Transaction ID: " + tx +"</p>"
+          			+ "<p>Available at contract address: " + address +"</p>"
+        		);
+        		if(!tx) {
+        			$("#responseText").html("<p><b>Certificate failed to get fingreprinted onto Ethereum blockchain</b></p>");
+        		}
+        		else {
+          			uniqueid = $("#uniqueID").val();
+          			insertIntoDB(hash, uniqueid);
+        		}
+      		});
+	    }
+	    else {
+	    	$("#responseText").append("<p>File already present on Ethereum blockchain.</p>"
+          		+ "<p>Institute: " + resultObj.instituteName + "</p>"
+          		+ "<p>Recipient: " + resultObj.recipientName + "</p>"
+          		+ "<p>Course: " + resultObj.courseName + "</p>"
+          		+ "<p>Marks/Grade: " + resultObj.marks + "</p>"
+          		+ "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
+        	);
+	    }
+    });
 
       // uniqueid = $("#uniqueID").val();
       // insertIntoDB(hash, uniqueid);
@@ -117,7 +124,7 @@ $(document).ready(function() {
           find(hashValArr);
         }
         else{
-          $("#responseText").html("<p>Error: invalid unique id.</p>");
+          $("#responseText").html("<p>Error: Invalid Unique ID.</p>");
         }
       }
     })
@@ -218,17 +225,19 @@ function find (hashValArr) {
   for (hash of hashValArr){
     // $("#responseText").append('<p>'+hash+'</p>');
     certify_find(hash, function(err, resultObj) {
-      if (resultObj.blockNumber != 0) {
+    	console.log(resultObj);
+
+      if (err || resultObj.blockNumber == 0) {
+        $("#responseText").append("<p><b>File fingerprint not found on Ethereum blockchain.</p>"
+          + "<p>File Hash Value: " + hash + "</b></p>"
+        );
+      } else {
         $("#responseText").append(
             "<p>Institute: " + resultObj.instituteName + "</p>"
           + "<p>Recipient: " + resultObj.recipientName + "</p>"
           + "<p>Course: " + resultObj.courseName + "</p>"
           + "<p>Marks/Grade: " + resultObj.marks + "</p>"
           + "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
-        );
-      } else {
-        $("#responseText").append("<p>File fingerprint not found on Ethereum blockchain.</p>"
-          + "<p>File Hash Value: " + hash + "</p>"
         );
       }
     });

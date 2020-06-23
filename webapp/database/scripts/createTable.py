@@ -25,7 +25,7 @@ def create_table(conn, create_table_sql):
 
 
 def main():
-	database_file = r"..\db\projectdb.db"
+	database_file = r"../db/projectdb.db"
 
 	sql_create_table_std_details = """ CREATE TABLE STUDENT_DETAILS(
 											id integer PRIMARY KEY,

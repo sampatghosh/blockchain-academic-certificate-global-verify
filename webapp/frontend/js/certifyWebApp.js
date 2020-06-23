@@ -1,6 +1,6 @@
 var contract = undefined;
 var customProvider = undefined;
-var address = "0xfBB02839E0DFCaFd6ca4784399E28F3091b8F072";
+var address = "0xA5FB32b226ECC34fF4AA81D0DB1F2eF324378C31";
 var abi = undefined;
 // var acc = "0x7c5c723cd38eeb2d2975dc241fa0a54a9f0ff3da";
 
@@ -17,6 +17,12 @@ function certify_init () {
   }
   //contract abi
   let abi = [
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
     {
       "constant": false,
       "inputs": [
@@ -74,11 +80,6 @@ function certify_init () {
           "type": "uint256"
         },
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
           "internalType": "string",
           "name": "",
           "type": "string"
@@ -107,17 +108,13 @@ function certify_init () {
       "payable": false,
       "stateMutability": "view",
       "type": "function"
-    },
-    {
-      "inputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
     }
   ];
 
   //init contract
   contract = new web3.eth.Contract(abi, address);
+  // console.log(contract);
+  // console.log(contract.address);
   // contract = new web3.eth.Contract(abi, address, {
   //   from: acc, // default from address
   //   gasPrice: '20000000000' // default gas price in wei, 20 gwei in this case
@@ -129,12 +126,11 @@ function certify_init () {
 function certify_send (hash, insti, reci, course, grade, doc, callback) {
     web3.eth.getAccounts(function (error, accounts) {
       // console.log("Account="+accounts[0]);
-      web3.eth.getBlock("latest", false, (error, result) => {
-        console.log(result.gasLimit)
-      
+      web3.eth.getBlock("latest", false, (error, result) => {      
         contract.methods.addDocHash(hash, insti, reci, course, grade, doc).send({
       	 from: accounts[0],
-          // gas: result.gasLimit-100000,
+      	 gas: 10000000
+         //gas: result.gasLimit-1000000,
         },function(error, tx) {
           if (error) callback(error, null);
           else callback(null, tx);
@@ -146,16 +142,25 @@ function certify_send (hash, insti, reci, course, grade, doc, callback) {
 //looks up a hash on the blockchain
 function certify_find (hash, callback) {
   contract.methods.findDocHash(hash).call( function (error, result) {
-    if (error) callback(error, null);
-    else {
+    if (error) { 
+      console.log("Returned ERROR from findDocHash");
+      console.log("Error = "+error);
+      console.log(error);
+      callback(error, null);
+    }else {
+      console.log("blockNumber = "+result[0]);
+      console.log("instituteName = "+result[1]);
+      console.log("recipientName = "+result[2]);
+      console.log("courseName = "+result[3]);
+      console.log("marks = "+result[4]);
+      console.log("dateOfCompletion = "+result[5]);
       let resultObj = {
-        mineTime:  new Date(result[0] * 1000),
-        blockNumber: result[1],
-        instituteName: result[2],
-        recipientName: result[3],
-        courseName: result[4],
-        marks: result[5],
-        dateOfCompletion: result[6]
+        blockNumber: result[0],
+        instituteName: result[1],
+        recipientName: result[2],
+        courseName: result[3],
+        marks: result[4],
+        dateOfCompletion: result[5]
       }
       callback(null, resultObj);
     }
