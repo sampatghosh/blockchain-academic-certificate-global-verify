@@ -77,4 +77,5 @@ foo@bar:~$ python3 /blockchain-academic-certificate-global-verify/webapp/api/api
 foo@bar:~$ http-server blockchain-academic-certificate-global-verify/webapp/ -c-1 
 ```
 - To Search all the details of all certificates issued to a particular student then go to search.html and enter UniqueID and click __Search__
-- To create new UniqueID click on uniqueID.html and create by running the database API
+- To Create new UniqueID click on uniqueID.html 
+- To Publish Certificate click on publish.html
