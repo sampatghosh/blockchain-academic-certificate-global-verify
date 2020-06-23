@@ -54,28 +54,33 @@ $(document).ready(function() {
       
     //check whether uniqueID is valid -- It is valid.
     certify_find(hash, function(err, resultObj) {
-    	if(err || resultObj.blockNumber == 0) {
-	      	certify_send(hash, insti, reci, course, marks, doc, function(err, tx) {
-    	    	console.log("Transaction ID="+tx);
-        		console.log("Contract Address="+address);
-        		console.log("Available at contract address: " + address);
-        		$("#responseText").html("<p><b>Certificate successfully fingreprinted onto Ethereum blockchain.</b></p>"
-          			+ "<p>File Hash Value: " + hash +"</p>"
-          			+ "<p>Transaction ID: " + tx +"</p>"
-          			+ "<p>Available at contract address: " + address +"</p>"
-        		);
-        		if(!tx) {
-        			$("#responseText").html("<p><b>Certificate failed to get fingreprinted onto Ethereum blockchain</b></p>");
-        		}
-        		else {
-          			uniqueid = $("#uniqueID").val();
-          			insertIntoDB(hash, uniqueid);
-        		}
-      		});
-	    }
-	    else {
-	    	alert("Certificate already present in Blockchain");
-	    }
+      if(err || resultObj.blockNumber == 0) {
+          certify_send(hash, insti, reci, course, marks, doc, function(err, tx) {
+            console.log("Transaction ID="+tx);
+            console.log("Contract Address="+address);
+            console.log("Available at contract address: " + address);
+            if(!tx) {
+              $("#responseText").html("<p><b>Certificate failed to get fingreprinted onto Ethereum blockchain</b></p>");
+            }
+            else {
+                $("#responseText").html("<p><b>Certificate successfully fingreprinted onto Ethereum blockchain.</b></p>"
+                + "<p>File Hash Value: " + hash +"</p>"
+                + "<p>Transaction ID: " + tx +"</p>"
+                + "<p>Available at contract address: " + address +"</p>"
+                );
+                uniqueid = $("#uniqueID").val();
+                insertIntoDB(hash, uniqueid);
+            }
+
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+
+
+          });
+      }
+      else {
+        alert("Certificate already present in Blockchain");
+      }
     });
 
       // uniqueid = $("#uniqueID").val();
@@ -124,6 +129,13 @@ $(document).ready(function() {
     })
 
   });
+
+
+  var span = document.getElementsByClassName("close")[0];
+  var modal = document.getElementById("myModal");
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
 
 
 });
@@ -188,14 +200,14 @@ function hashForFile(callback) {
 //activity on Publish button click
 // function send () {
 //   hashForFile(function (err, hash) {
-//   	insti = document.getElementById("insti");
-//   	reci = document.getElementById("reci");
-//   	course = document.getElementById("course");
-//   	marks = document.getElementById("marks");
-//   	doc = document.getElementById("doc");
-//   	uniqueID = document.getElementById("uniqueID");
-  	
-//   	//check whether uniqueID is valid
+//    insti = document.getElementById("insti");
+//    reci = document.getElementById("reci");
+//    course = document.getElementById("course");
+//    marks = document.getElementById("marks");
+//    doc = document.getElementById("doc");
+//    uniqueID = document.getElementById("uniqueID");
+    
+//    //check whether uniqueID is valid
     
 //     certify_send(hash, insti, reci, course, marks, doc, function(err, tx) {
 //       $("#responseText").html("<p>Certificate successfully fingreprinted onto Ethereum blockchain.</p>"
@@ -215,11 +227,11 @@ function hashForFile(callback) {
 function find (hashValArr) {
 
   var hash;
-  $("#responseText").html('');
+  $("#responseText").html(" ");
   for (hash of hashValArr){
     // $("#responseText").append('<p>'+hash+'</p>');
     certify_find(hash, function(err, resultObj) {
-    	console.log(resultObj);
+      console.log(resultObj);
 
       if (err || resultObj.blockNumber == 0) {
         $("#responseText").append("<p><b>File fingerprint not found on Ethereum blockchain.</p>"
@@ -234,6 +246,9 @@ function find (hashValArr) {
           + "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
         );
       }
+
+      $("#responseText").append('<p style="width:100%; border-top:solid 1px #000"></p>');
+
     });
   }
 

@@ -5,9 +5,39 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-	<a class="btn btn-primary" id=publish href="publish.html" role="button">Fingerprint on Blockchain</a>
-	<a class="btn btn-primary" id=search href="search.html" role="button">Search on Blockchain</a>
-	<a class="btn btn-primary" id=create href="uniqueID.html" role="button">Create Unique ID</a>
+
+
+	<style>
+
+		
+	</style>
+
+	<div class="jumbotron" style="border-radius: 0; background-color: #34495e">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8" style="text-align: center">
+				<h2 style="color: #fff"><b>Blockchain application for Academic certification management</b></h3>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8" style="text-align: center">
+				<p style="padding:5% 0; border: solid 1px #34495e; border-radius: 5px">A novel blockchain application that allows creation of a user, publish document for that user in blockchain and search for those document.</p>
+				<a class="btn btn-primary" id="create" href="signup.html" role="button">Sign Up</a>
+				<a class="btn btn-primary" id="publish" href="publish.html" role="button">Publish</a>
+				<a class="btn btn-primary" id="search" href="search.html" role="button">Search</a>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+
+	<div style="background-color: #34495e; color: #fff; visibility: hidden" class="create-tooltip">Create a new user for publishing data into blockchain</div>
+	<div style="background-color: #34495e; color: #fff; visibility: hidden" class="publish-tooltip">Publish data for an existing user</div>
+	<div style="background-color: #34495e; color: #fff; visibility: hidden" class="search-tooltip">Search data using unique id</div>
 
 </body>
 </html>

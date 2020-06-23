@@ -40,6 +40,40 @@ def api_call_hash_all():
 	return jsonify(hashdata)
 
 
+def insert_user(conn, doc):
+	sql = '''INSERT INTO STUDENT_DETAILS(email_id,name,password,dob)
+			 VALUES(?,?,?,?)'''
+	cur = conn.cursor()
+	cur.execute(sql, doc)
+	return cur.lastrowid
+
+
+@app.route('/api/v1/signup', methods=['GET'])
+def api_call_signup():
+	result = {'uniqueid': 0}
+
+	if 'email' in request.args and 'name' in request.args and 'pwd' in request.args and 'dob' in request.args:
+		user_email = request.args['email']
+		user_name = request.args['name']
+		user_pwd = request.args['pwd']
+		user_dob = request.args['dob']
+
+		database_file = r"../database/db/projectdb.db"
+		conn = create_connection(database_file)
+		print("database connection created")
+		print(conn)
+		doc = (user_email, user_name, user_pwd, user_dob)
+		doc_id = insert_user(conn, doc)
+		conn.commit();
+		conn.close();
+		print("database connection closed.")
+		print("student id: ", doc_id)
+		result['uniqueid'] = doc_id
+
+	return jsonify(result)
+
+
+
 # api call for inserting hash value in STUDENT_DOCUMENT_HASH table
 # client will pass student id and hash of document and api will return status of insertion.
 @app.route('/api/v1/insert/hashvalue', methods=['GET'])
