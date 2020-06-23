@@ -74,13 +74,7 @@ $(document).ready(function() {
       		});
 	    }
 	    else {
-	    	$("#responseText").append("<p>File already present on Ethereum blockchain.</p>"
-          		+ "<p>Institute: " + resultObj.instituteName + "</p>"
-          		+ "<p>Recipient: " + resultObj.recipientName + "</p>"
-          		+ "<p>Course: " + resultObj.courseName + "</p>"
-          		+ "<p>Marks/Grade: " + resultObj.marks + "</p>"
-          		+ "<p>Date of Completion: " + resultObj.dateOfCompletion + "</p>"
-        	);
+	    	alert("Certificate already present in Blockchain");
 	    }
     });
 
