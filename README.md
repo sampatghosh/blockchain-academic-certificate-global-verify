@@ -15,7 +15,6 @@
 
 ## Tools Used 
 - Truffle
-- Ganache
 - Ethereum
 - NodeJS
 - MetaMask
@@ -47,11 +46,11 @@ foo@bar:~/blockchain-academic-certificate-global-verify$ truffle compile
 - Setup private blockchain using geth, create account and generate fake Ether for your account
 - Start your node using:
 ```console
-foo@bar:~$ geth --port 3000 --networkid 143 --nodiscover --rpc --rpcport 8545 --rpcaddr 127.0.0.1 --datadir=~/blockchain --maxpeers=0 --rpccorsdomain "*" --rpcapi "eth,net,web3,personal,miner" --allow-insecure-unlock --password <(echo password) --unlock 0
+foo@bar:~$ geth --datadir ./blockchain --networkid 2018 --rpc --nodiscover --rpc --rpcport 8545 --rpcaddr 127.0.0.1 --maxpeers=0 --rpccorsdomain "*" --rpcapi "personal,eth,net,web3,debug,miner" --allow-insecure-unlock --password <(echo "seed") --unlock 0 
 ```
 - Open geth console and start mining:
 ```console
-foo@bar:~$ geth attach ipc:/$HOME/blockchain/geth.ipc
+foo@bar:~$ geth attach http://127.0.0.1:8545
 Welcome to the Geth JavaScript console!
 
 instance: Geth/v1.9.14-stable-6d74d1e5/linux-amd64/go1.14.2
