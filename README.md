@@ -46,7 +46,7 @@ foo@bar:~/blockchain-academic-certificate-global-verify$ truffle compile
 - Setup private blockchain using geth, create account and generate fake Ether for your account
 - Start your node using:
 ```console
-foo@bar:~$ geth --datadir ./blockchain --networkid 2018 --rpc --nodiscover --rpc --rpcport 8545 --rpcaddr 127.0.0.1 --maxpeers=0 --rpccorsdomain "*" --rpcapi "personal,eth,net,web3,debug,miner" --allow-insecure-unlock --password <(echo "seed") --unlock 0 
+foo@bar:~$ geth --datadir ./blockchain --networkid 2018 --rpc --nodiscover --rpc --rpcport 8545 --rpcaddr 127.0.0.1 --maxpeers=0 --rpccorsdomain "*" --rpcapi "personal,eth,net,web3,debug,miner" --allow-insecure-unlock --password <(echo __password__) --unlock 0 
 ```
 - Open geth console and start mining:
 ```console
@@ -65,7 +65,7 @@ modules: admin:1.0 debug:1.0 eth:1.0 ethash:1.0 miner:1.0 net:1.0 personal:1.0 r
 foo@bar:~/blockchain-academic-certificate-global-verify$ truffle migrate 
 ```
 - Write the contract address at line 3 in app.js
-> var address = "0xd121f94184Da71908123a1e08F72cAB8573b9363";
+> var address = "0xA5FB32b226ECC34fF4AA81D0DB1F2eF324378C31";
 - Setup MetaMask and import account from blockchain directory
 
 - Run database API
