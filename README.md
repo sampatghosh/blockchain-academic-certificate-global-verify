@@ -5,6 +5,8 @@
 - Publish Certificate in Blockchain
 - Get all the certificate issued to a particular recipient at on click
 ### Issue UniqueID
+- User is requested to enter some details like name, email, password etc
+- He/she is given a automatically generated ID which is their UniqueId
 
 ### Publish Certificate
 - The institution will ask the recipient for their UniqueID, without which the certificate cannot be published.
